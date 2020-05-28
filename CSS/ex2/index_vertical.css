@@ -1,0 +1,51 @@
+*{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+header{
+	background-color: red;
+	height: 20%;
+	display: flex;
+	align-items: center;
+}
+
+ul{
+	position: absolute;
+	background-color: yellow;
+	list-style-type: none;
+	height: 60%;
+	top: 20%;
+	width: 20%;
+	display: block;
+	padding: 0;
+}
+
+ul li{
+	height: 10%;
+	display: flex;
+	align-items: center;
+	padding-left: 10px;
+	border-bottom-style: solid;
+}
+
+#view{
+	position: absolute;
+	background-color: green;
+	display: flex;
+	align-items: center;
+	height: 60%;
+	width: 80%;
+	left: 20%;
+}
+
+footer{
+	position: absolute;
+	background-color: pink;
+	top: 80%;
+	height: 20%;
+	display: flex;
+	align-items: center;
+}

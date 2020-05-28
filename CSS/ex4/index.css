@@ -1,0 +1,74 @@
+div{
+	visibility: hidden;
+}
+
+ul{
+	height: 100px;
+	width: 100px;
+	list-style-type: none;
+	display: flex;
+	font-size: 20px;
+	text-decoration: none;
+}
+
+#l1{
+	background: url("facebook.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l2{
+	background: url("pinkydots.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l3{
+	background: url("pinky.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l4{
+	background: url("googleplus.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l5{
+	background: url("linkedin.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l6{
+	background: url("pinterest.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l7{
+	background: url("wifi.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l8{
+	background: url("skype.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l9{
+	background: url("twitter.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l10{
+	background: url("v.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l11{
+	background: url("youtube.png") no-repeat;
+	filter: grayscale(100%);
+}
+
+#l1:hover, #l2:hover, #l3:hover, #l4:hover, #l5:hover, #l6:hover,
+#l7:hover, #l8:hover, #l9:hover, #l10:hover, #l11:hover
+{
+	filter: grayscale(0%);
+	cursor: pointer;
+}

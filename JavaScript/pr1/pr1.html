@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema 1</title>
+	<style type="text/css">
+		#container{
+			display: flex;
+            justify-content: center;
+		}
+		#list1, #list2{
+			width: 100px;
+			height: 150px;
+			align-items: center;
+		}
+		option{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<select multiple id="list1">
+			<option value="el1">1</option>
+			<option value="el2">2</option>
+			<option value="el3">3</option>
+			<option value="el4">4</option>
+		</select>
+		<select multiple id="list2">
+			<option value="el5">5</option>
+			<option value="el6">6</option>
+			<option value="el7">7</option>
+			<option value="el8">8</option>
+		</select>
+	</div>
+</body>
+<script type="text/javascript">
+	list1 = document.getElementById('list1');
+	list2 = document.getElementById('list2');
+
+	//cand se apasa dublu-click pe un element al listei din stanga
+	list1.ondblclick = function(){
+		var selected = list1.options[list1.selectedIndex];
+		list2.appendChild(selected);
+		list1.remove(list1.selectedIndex);
+	}
+	//cand se apasa dublu-click pe un element al listei din dreapta
+	list2.ondblclick = function(){
+		var selected = list2.options[list2.selectedIndex];
+		list1.appendChild(selected);
+		list2.remove(list2.selectedIndex);
+	}
+</script>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema 2</title>
+	<style type="text/css">
+		#container{
+			text-align: center;
+		}
+		label{
+			width: 200px;
+			text-align: right;
+			display: inline-block;
+		}
+		input{
+			width: 200px;
+		}
+		button{
+			display: inline-block;
+		}
+	</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		function validareNastere(){
+			var dataNasterii = $("#dataNasterii").val();
+			var data = dataNasterii.split('-');
+			var year = data[0];
+			var day = data[1];
+			var month = data[2];
+			if(year == "yyyy" || day == "dd" || month == "mm"){
+				return false;
+			}
+			year = parseInt(year);
+			if(year < 1900 || year > 2020){
+				return false;
+			}
+			return true;
+		}
+
+		//functia valideaza daca corespondenta dintre varsta si data de nastere e corecta
+		function validareVarsta(){
+			var dataNasterii = $("#dataNasterii").val();
+			var varsta = $("#varsta").val();
+			if(isNaN(varsta)){
+				return false;
+			}
+			if(validareNastere()){
+				var data = dataNasterii.split('-');
+				var year = data[0];
+				var day = data[1];
+				var month = data[2];
+				age = parseInt(varsta);
+				year = parseInt(year);
+				day = parseInt(day);
+				month = parseInt(month);
+				//verific in continuare daca are varsta implinita
+				if(2020 - year == age + 1){
+					if(month > 4){
+						return true;
+					}
+					else if(month == 4){
+						if(day > 16){
+							return true;
+						}
+					}
+					return false;
+				}
+				if(2020 - year == age){
+					if(month < 4){
+						return true;
+					}
+					else if(month == 4){
+						if(day < 16){
+							return true;
+						}
+					}
+					return false;
+				}
+			}
+			return false;
+		}
+
+		//functia valideaza adresa de email introdusa
+		function validareEmail(){
+			var email = $("#email").val();
+			if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+				return true;
+			}
+			return false;
+		}
+
+		$(document).ready(function(){
+			$("button").click(function(){
+				$("#nume").css("border-color", "initial");
+				$("#dataNasterii").css("border-color", "initial");
+				$("#varsta").css("border-color", "initial");
+				$("#email").css("border-color", "initial");
+
+				var nume = $("#nume").val();
+				var dataNasterii = $("#dataNasterii").val();
+				var varsta = $("#varsta").val();
+				var email = $("#email").val();
+
+				errors = [];
+
+				if(nume == ""){
+					errors.push('nume');
+				}
+				if(dataNasterii == "" || !validareNastere()){
+					errors.push('dataNasterii');
+				}
+				if(varsta == "" || !validareVarsta()){
+					errors.push('varsta');
+				}
+				if(email == "" || !validareEmail()){
+					errors.push('email');
+				}
+				if(errors != ""){
+					for(i = 0; i < errors.length; i++){
+						$(`#${errors[i]}`).css("border-color", "red");
+					}
+				}
+				else{
+					alert("Datele sunt introduse corect!");
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="container">
+		<label>Nume:</label>
+		<input id="nume" type="text" name="nume"><br>
+		<label>Data nasterii:</label>
+		<input id="dataNasterii" type="date" name="dataNasterii"><br>
+		<label>Varsta:</label>
+		<input id="varsta" type="text" name="varsta"><br>
+		<label>Email:</label>
+		<input id="email" type="text" name="email"><br><br>
+		<button>Trimite</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema 1</title>
+	<style type="text/css">
+		#container{
+			display: flex;
+            justify-content: center;
+		}
+		#list1, #list2{
+			width: 100px;
+			height: 150px;
+		}
+		option{
+			text-align: center;
+		}
+	</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#list1").dblclick(function(){
+				var selected = $(this).children("option:selected");
+				selected.remove();
+				var text = selected.val();
+				$("#list2").append(`<option>${text}</option>`);
+			});
+			$("#list2").dblclick(function(){
+				var selected = $(this).children("option:selected");
+				selected.remove();
+				var text = selected.val();
+				$("#list1").append(`<option>${text}</option>`);
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="container">
+		<select multiple id="list1">
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+		</select>
+		<select multiple id="list2">
+			<option>5</option>
+			<option>6</option>
+			<option>7</option>
+			<option>8</option>
+		</select>
+	</div>
+</body>
+</html>

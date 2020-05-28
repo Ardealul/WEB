@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+	<title>Ceva formular</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<table>
+		<tr>
+			<th colspan="3">Formular de comand&#259; online</th>
+		</tr>
+		<!--Pasul 1-->
+		<tr>
+			<th colspan="3">Pasul 1 - Detalii client</th>
+		</tr>
+		<tr>
+			<th>Persoan&#259; fizic&#259;</th>
+			<th></th>
+			<th>Persoan&#259; juridic&#259;</th>
+		</tr>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td>Nume:</td>
+						<td><input type="text" name="nume" size="20"></td>
+					</tr>
+					<tr>
+						<td>Prenume:</td>
+						<td><input type="text" name="prenume" size="20"></td>
+					</tr>
+					<tr>
+						<td>
+							<form action="https://www.youtube.com/">
+								<input type="radio" name="sex">M<br>
+								<input type="radio" name="sex">F
+							</form>
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>CNP:</td>
+						<td><input type="text" name="cnp"></td>
+					</tr>
+					<tr>
+						<td>Telefon:</td>
+						<td><input type="text" name="telefon"></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><input type="text" name="email"></td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table>
+					<tr>
+						<td>Denumire:</td>
+						<td>
+							<select name="denumire">
+								<option value="sc">S.C.</option>
+								<option value="sprl">S.P.R.L</option>
+								<option value="ong">O.N.G</option>
+								<option value="pfa">P.F.A</option>
+								<option value="cmi">C.M.I</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="denumire">
+						</td>
+					</tr>
+					<tr>
+						<td>Cod fiscal</td>
+						<td>
+							<select name="codF">
+								<option value="ro" >RO</option>
+								<option value="none">-</option>
+							</select>
+						</td>
+						<td><input type="text" name="codFiscal"></td>
+					</tr>
+					<tr>
+						<td>Banca:</td>
+						<td colspan="2">
+							<select name="banca">
+								<option value="reiff">Reiffeisen</option>
+								<option value="bt">BT</option>
+								<option value="brd">BRD</option>
+								<option value="bcr">BCR</option>
+								<option value="otp">OPT Bank</option>
+								<option value="alpha">Alpha Bank</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">Cont bancar:</td>
+						<td><input type="text" name="contBancar"></td>
+					</tr>
+				</table>
+			</td>
+			<td></td>
+		</tr>
+		<!--Pasul 2-->
+		<tr>
+			<th colspan="3">Pasul 2 - Detalii facturare</th>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<input type="radio" name="tipFactura">Ridic personal comanda<br>
+				<input type="radio" name="tipFactura">Adresa de livrare
+				<form action="https://www.youtube.com/">
+					Județ: <select name="judete">
+						<option>Alba</option>
+						<option>Arad</option>
+						<option>Arge&#351;</option>
+						<option>Bac&#259;u</option>
+						<option>Bihor</option>
+						<option>Bistri&#355;a-N&#259;s&#259;ud</option>
+						<option>Boto&#351;ani</option>
+						<option>Br&#259;ila</option>
+						<option>Bra&#351;ov</option>
+						<option>Bucure&#351;ti</option>
+						<option>Buz&#259;u</option>
+						<option>C&#259;l&#259;ra&#351;i</option>
+						<option>Cara&#351;-Severin</option>
+						<option>Cluj</option>
+						<option>Constan&#355;a</option>
+						<option>Covasna</option>
+						<option>Dâmbovi&#355;a</option>
+						<option>Dolj</option>
+						<option>Gala&#355;i</option>
+						<option>Giurgiu</option>
+						<option>Gorj</option>
+						<option>Harghita</option>
+						<option>Hunedoara</option>
+						<option>Ialomi&#355;a</option>
+						<option>Ia&#351;i</option>
+						<option>Ilfov</option>
+						<option>Maramure&#351;</option>
+						<option>Mehedin&#355;i</option>
+						<option>Mure&#351;</option>
+						<option>Neam&#355;</option>
+						<option>Olt</option>
+						<option>Prahova</option>
+						<option>S&#259;laj</option>
+						<option>Satu-Mare</option>
+						<option>Sibiu</option>
+						<option>Suceava</option>
+						<option>Teleorman</option>
+						<option>Timi&#351;</option>
+						<option>Tulcea</option>
+						<option>Vâlcea</option>
+						<option>Vaslui</option>
+						<option>Vrancea</option>
+					</select>
+					Localitate/Sector: <input type="text" name="localitate"><br>
+					Adres&#259;: <textarea name="adresa" cols="70" rows="2"></textarea><br>
+					Cod po&#351;tal: <input type="text" name="codPostal">
+				</form>
+			</td>
+		</tr>
+		<!--Pasul 3-->
+		<tr>
+			<th colspan="3">Pasul 3 - Modalit&#259;&#355;i de plat&#259;</th>
+		</tr>
+		<tr>
+			<td  colspan="3">
+				<fieldset>
+					<legend>Alege card</legend>
+					<form action="https://www.youtube.com/">
+						<input type="radio" name="card"><img src="visa.png" alt="visa" width="50" height="50">
+						<input type="radio" name="card"><img src="maestro.png" alt="maestro" width="50" height="50">
+						<input type="radio" name="card"><img src="mastercard.png" alt="mastercard" width="50" height="50">
+					</form>
+				</fieldset>
+				<table>
+					<tr>
+						<td colspan="2">
+							Num&#259;rul cardului: <input type="text" name="nrCard">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Data expir&#259;rii: <select name="lunaExpirare">
+								<option>01</option>
+								<option>02</option>
+								<option>03</option>
+								<option>04</option>
+								<option>05</option>
+								<option>06</option>
+								<option>07</option>
+								<option>08</option>
+								<option>09</option>
+								<option>10</option>
+								<option>11</option>
+								<option>12</option>
+							</select>
+							<select name="anExpirare">
+								<option>2020</option>
+								<option>2021</option>
+								<option>2022</option>
+								<option>2023</option>
+								<option>2024</option>
+								<option>2025</option>
+							</select>
+						</td>
+						<td>
+							Cod securitate: <input type="text" name="codSecuritate">
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<!--Pasul 4-->
+		<tr>
+			<th colspan="3">Pasul 4 - Termeni &#351;i condi&#355;ii</th>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<h4>Regulamentul plas&#259;rii unei comenzi cuprinde urm&#259;toarele: </h4>
+				<ol type="I">
+					<li>Cu privire la produs:
+						<ol type="1">
+							<li>Produsul se poate returna în caz de stric&#259;ciune în termen de 30 zile.</li>
+							<li>După expirarea termenului de garan&#355;ie, nu se vor putea face modific&#259;ri.</li>
+						</ol>
+					</li>
+					<li>Cu privire la comanda:
+						<ul>
+							<li>Comanda poate fi anulat&#259; în termen de o zi.</li>
+							<li>Dup&#259; expirarea termenului de o zi, comanda nu va mai putea fi anulat&#259;.</li>
+							<li>Modificarea adresei de livrare va fi posibil&#259;.</li>
+						</ul>
+					</li>
+					<li>Cu privire la transport:
+						<ul>
+							<li>În cazul transportului prin curierat, curierul are datoria de a:
+								<ol type="a">
+									<li>anunța cu cel puțin o or&#259; înainte de sosirea coletului.</li>
+									<li>se asigura de protec&#355;ia colectului.</li>
+									<li>emiterea unei facturi aferente comenzii.</li>
+								</ol>
+							</li>
+							<li>În cazul neprelu&#259;rii comenzii, coletul va fi predat celei mai apropiate agen&#355;ii de curierat.</li>
+						</ul>
+					</li>
+				</ol>
+				<input type="checkbox" name="acord" checked disabled> Sunt de acord cu termenii &#351;i condi&#355;iile.
+			</td>
+		</tr>
+		<!--Pasul 5-->
+		<tr>
+			<th colspan="3">Pasul 5 - Plasare comand&#259;</th>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<button>Comand&#259;</button>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

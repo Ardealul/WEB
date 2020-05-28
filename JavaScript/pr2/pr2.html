@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema 2</title>
+	<style type="text/css">
+		#container{
+			text-align: center;
+		}
+		label{
+			width: 200px;
+			text-align: right;
+			display: inline-block;
+		}
+		input{
+			width: 200px;
+		}
+		button{
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<label>Nume:</label>
+		<input id="nume" type="text" name="nume"><br>
+		<label>Data nasterii:</label>
+		<input id="dataNasterii" type="date" name="nume"><br>
+		<label>Varsta:</label>
+		<input id="varsta" type="text" name="nume"><br>
+		<label>Email:</label>
+		<input id="email" type="text" name="nume"><br><br>
+		<button onclick="validare()">Trimite</button>
+	</div>
+</body>
+<script type="text/javascript">
+	var nume = document.getElementById('nume');
+	var dataNasterii = document.getElementById('dataNasterii');
+	var varsta = document.getElementById('varsta');
+	var email = document.getElementById('email');
+
+	//functia valideaza data de nastere introdusa
+	function validareNastere(){
+		var data = dataNasterii.value.split('-');
+		var year = data[0];
+		var day = data[1];
+		var month = data[2];
+		if(year == "yyyy" || day == "dd" || month == "mm"){
+			return false;
+		}
+		year = parseInt(year);
+		if(year < 1900 || year > 2020){
+			return false;
+		}
+		return true;
+	}
+
+	//functia valideaza daca corespondenta dintre varsta si data de nastere e corecta
+	function validareVarsta(){
+		if(isNaN(varsta.value)){
+			return false;
+		}
+		if(validareNastere()){
+			var data = dataNasterii.value.split('-');
+			var year = data[0];
+			var day = data[1];
+			var month = data[2];
+			age = parseInt(varsta.value);
+			year = parseInt(year);
+			day = parseInt(day);
+			month = parseInt(month);
+			//verific in continuare daca are varsta implinita
+			if(2020 - year == age + 1){
+				if(month > 4){
+					return true;
+				}
+				else if(month == 4){
+					if(day > 16){
+						return true;
+					}
+				}
+				return false;
+			}
+			if(2020 - year == age){
+				if(month < 4){
+					return true;
+				}
+				else if(month == 4){
+					if(day < 16){
+						return true;
+					}
+				}
+				return false;
+			}
+		}
+		return false;
+	}
+
+	//functia valideaza adresa de email introdusa
+	function validareEmail(){
+		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)){
+			return true;
+		}
+		return false;
+	}
+
+	//functia de validare de campuri
+	function validare(){
+		document.getElementById('nume').style.borderColor = "initial";
+		document.getElementById('dataNasterii').style.borderColor = "initial";
+		document.getElementById('varsta').style.borderColor = "initial";
+		document.getElementById('email').style.borderColor = "initial";
+		errors = []
+		if(nume.value == ""){
+			errors.push('nume');
+		}
+		if(dataNasterii.value == "" || !validareNastere()){
+			errors.push('dataNasterii');
+		}
+		if(varsta.value == "" || !validareVarsta()){
+			errors.push('varsta');
+		}
+		if(email.value == "" || !validareEmail()){
+			errors.push('email');
+		}
+
+		if(errors.length > 0){
+			var string = "Eroare! Ai grija la campurile: ";
+			for(i = 0; i < errors.length; i++){
+				document.getElementById(errors[i]).style.borderColor = "red";
+				string += errors[i];
+				if(i == errors.length - 1){
+					string += "!";
+				}
+				else{
+					string += ", ";
+				}
+			}
+			alert(string)
+		}
+		else{
+			alert('Datele sunt completate corect!');
+		}
+	}
+</script>
+</html>

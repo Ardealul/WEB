@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema 4 - JQuery Client</title>
+	<style type="text/css">
+		div{
+			margin-top: 150px;
+			position: absolute;
+			left: 40%;
+		}
+		table{
+			border: 1px solid black;
+			width: 300px;
+			height: 300px;
+		}
+		td{
+			border: 1px solid black;
+			width: 100px;
+			height: 100px;
+			text-align: center;
+			font-size: 20px;
+			padding: 0;
+			margin: 0;
+		}
+		td:hover{
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<table id="table">
+			<tr>
+				<td id="00"></td>
+				<td id="01"></td>
+				<td id="02"></td>
+			</tr>
+			<tr>
+				<td id="10"></td>
+				<td id="11"></td>
+				<td id="12"></td>
+			</tr>
+			<tr>
+				<td id="20"></td>
+				<td id="21"></td>
+				<td id="22"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	//human player plays with X and computer player with 0
+
+	var positionsAvailable = [1, 2, 3, 4, 5, 6, 7, 8, 9]; //list with all possible positions
+	var positionsX = []; //store chosen positions by human player
+	var positions0 = []; //store chosen positions by computer player
+
+	function pressCell(row, column){
+		var element = $(`#table tr:eq("${row}") td:eq("${column}")`)[0];
+		var tableElem = 1 + (row * 3) + column; //compute which position we chose
+		if(element.innerHTML == ""){
+			element.innerHTML = "X";
+			position = positionsAvailable.indexOf(tableElem);
+			positionsAvailable.splice(position, 1); //remove element from list of available positions
+			positionsX.push(tableElem); //add element to list of positions chose by X
+
+			//call ajax for checking if human player wins
+			var method = "GET";
+			var url = "server_side.php?player=X&positions=" + positionsX + "&positionsAvailable=" + positionsAvailable;
+
+			$.ajax({
+				type: method,
+				url: url,
+				success: function(data){
+					if (data == -1){
+						alert("YOU won! Game will refresh!");
+						restartGame();
+					}
+					else if(positionsAvailable.length == 0){ //last move is our, so if we didnt win, we drew 
+						alert("Draw! Game will refresh!");
+						restartGame();
+					}
+					else{
+						var element = positionsAvailable[data];
+						positionsAvailable.splice(data, 1); //remove element from list of available positions
+						positions0.push(element); //add element to list of positions chose by 0
+
+						//compute row and column of element in the table
+						var row = Math.floor((element - 1) / 3);
+						var column = (element - 1) % 3;
+
+						var element = $(`#table tr:eq("${row}") td:eq("${column}")`)[0];
+						element.innerHTML = "0";
+
+						//call ajax for checking if computer wins
+						var method = "GET";
+						var url = "server_side.php?player=0&positions=" + positions0 + "&positionsAvailable=" + positionsAvailable;
+
+						$.ajax({
+							type: method,
+							url: url,
+							success: function(data){
+								if (data == -1){
+									alert("COMPUTER won! :( Game will refresh!");
+									restartGame();
+								}
+							}
+						});
+					}
+				}
+			});
+		}
+	}
+
+	//reinitialize the game
+	function restartGame(){
+		$("td").each(function() {
+	    var value = $(this).html();
+	    if (value == "0" || value== "X"){
+	    	$(this).html("");
+	    }
+	});
+		positionsAvailable = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+		positionsX = [];
+		positions0 = [];
+	}
+
+	$(document).ready(function(){
+		$("#00").click(function(){
+			pressCell(0, 0);
+		});
+		$("#01").click(function(){
+			pressCell(0, 1);
+		});
+		$("#02").click(function(){
+			pressCell(0, 2);
+		});
+		$("#10").click(function(){
+			pressCell(1, 0);
+		});
+		$("#11").click(function(){
+			pressCell(1, 1);
+		});
+		$("#12").click(function(){
+			pressCell(1, 2);
+		});
+		$("#20").click(function(){
+			pressCell(2, 0);
+		});
+		$("#21").click(function(){
+			pressCell(2, 1);
+		});
+		$("#22").click(function(){
+			pressCell(2, 2);
+		});
+	});
+</script>
+</html>

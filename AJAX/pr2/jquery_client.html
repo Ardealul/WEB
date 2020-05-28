@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema 2 - JQuery Client</title>
+	<style type="text/css">
+		#mainDiv{
+			position: absolute;
+			left: 35%;
+			text-align: center;
+		}
+		#divButtons{
+			padding-top: 10px;
+		}
+		button{
+			cursor: pointer;
+		}
+		table{
+			border: 1px solid black;
+			text-align: center;
+		}
+		th, td{
+			padding: 15px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="mainDiv">
+		<div id="divTable">
+			<table>
+				<tr>
+					<th>Nume</th>
+					<th>Prenume</th>
+					<th>Telefon</th>
+					<th>Email</th>
+				</tr>
+				<tbody id="tableBody">
+					
+				</tbody>
+			</table>
+		</div>
+		<div id="divButtons">
+			<button id="prevButton">Prev</button>
+			<button id="nextButton">Next</button>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	var from = 0; // de la ce inregistrare sa afiseze
+	var prevButton = $("#prevButton");
+	var nextButton = $("#nextButton");
+
+	function uploadTable(from){
+		//sa nu pot da previous
+		if (from == 0){
+			prevButton.attr("disabled", "true");
+			prevButton.css("cursor", "default");
+		}
+		else{
+			if (prevButton.prop("disabled")){
+				prevButton.removeAttr("disabled", "false");
+			}
+			prevButton.css("cursor", "pointer");
+		}
+
+		//sa nu pot da next
+		if(from > 3){
+			nextButton.attr("disabled", "true");
+			nextButton.css("cursor", "default");
+		}
+		else{
+			if (nextButton.prop("disabled")){
+				nextButton.removeAttr("disabled", "false");
+			}
+			nextButton.css("cursor", "pointer");
+		}
+
+		//call ajax
+		var method = "GET";
+		var url = "server_side.php?from=" + from;
+
+		$.ajax({
+			type: method,
+			url: url,
+			success: function(data){
+				//convertim rezultatul primit in format json intr un array
+				var data = JSON.parse(data);
+
+				var tbody = $("#tableBody");
+
+				clearTable(tbody);
+
+				for (var i = 0; i < data.length; i++)
+				{
+					var html = "";
+					var nume = data[i].Nume;
+					var prenume = data[i].Prenume;
+					var telefon = data[i].Telefon;
+					var email = data[i].Email;
+					html += "<tr>";
+					html += "<td>" + nume + "</td>";
+					html += "<td>" + prenume + "</td>";
+					html += "<td>" + telefon + "</td>";
+					html += "<td>" + email + "</td>";
+					html += "</tr>";
+
+					tbody.append(html);
+				}
+			}
+		});
+	}
+
+	function clearTable(tbody){
+		tbody.empty();
+	}
+
+	function pressPrev(){
+		from -=3;
+		uploadTable(from);
+	}
+
+	function pressNext(){
+		from += 3;
+		uploadTable(from);
+	}
+
+	$(document).ready(function(){
+		uploadTable(from);
+		$("#prevButton").click(function(){
+			pressPrev();
+		});
+		$("#nextButton").click(function(){
+			pressNext();
+		});
+	});
+</script>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema 4</title>
+	<style type="text/css">
+	table{
+		width: 300px;
+		height: 100px;
+		text-align: center;
+	}
+	#table3{
+		width: 500px;
+		height: 100px;
+	}
+	th:hover{
+		cursor: pointer;
+	}
+	</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		function sortare(nrTabel, nrColumn){
+			var table, rows, switching, i, x, y, shouldSwitch;
+			var switchingCount = 0;
+	  		table = $(`#${nrTabel}`)[0];
+	  		console.log(table);
+	  		switching = true;
+	  		order = "asc";
+	  		while(switching){
+	  			switching = false;
+	  			rows = table.rows;
+	  			for(i = 1; i < (rows.length - 1); i++){
+	  				shouldSwitch = false;
+	  				x = $(`#${nrTabel} tr:eq("${i}") td:eq("${nrColumn}")`)[0];
+	      			y = $(`#${nrTabel} tr:eq("${i + 1}") td:eq("${nrColumn}")`)[0];
+
+	      			if(order == "asc"){
+		      			if (Number(x.innerHTML) > Number(y.innerHTML)) {
+			        		shouldSwitch = true;
+			        		break;
+		      			}
+	      			}
+	      			else if(order == "desc"){
+	      				if (Number(x.innerHTML) < Number(y.innerHTML)) {
+			        		shouldSwitch = true;
+			        		break;
+		      			}
+	      			}
+	  			}
+	  			if (shouldSwitch) {
+				    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+				    switching = true;
+				    switchingCount ++;
+	    		}
+	    		else{
+	    			if(switchingCount == 0 && order == "asc"){
+	    				order = "desc";
+	    				switching = true;
+	    			}
+	    		}
+	  		}
+		}
+		$(document).ready(function(){
+			$("#t1th1").click(function(){
+				sortare('table1', 1);
+			});
+			$("#t1th2").click(function(){
+				sortare('table1', 2);
+			});
+			$("#t2th1").click(function(){
+				sortare('table2', 1);
+			});
+			$("#t2th2").click(function(){
+				sortare('table2', 2);
+			});
+			$("#t3th0").click(function(){
+				sortare('table3', 0);
+			});
+			$("#t3th2").click(function(){
+				sortare('table3', 2);
+			});
+			$("#t3th3").click(function(){
+				sortare('table3', 3);
+			});
+			$("#t3th4").click(function(){
+				sortare('table3', 4);
+			});
+			$("#t3th5").click(function(){
+				sortare('table3', 5);
+			});
+		});
+	</script>
+</head>
+<body>
+	<table id="table1">
+		<tr>
+			<th>Produs</th>
+			<th id="t1th1">Cantitate</th>
+			<th id="t1th2">Pret</th>
+		</tr>
+		<tr>
+			<td>Mere</td>
+			<td>10</td>
+			<td>8</td>
+		</tr>
+		<tr>
+			<td>Pere</td>
+			<td>20</td>
+			<td>6</td>
+		</tr>
+		<tr>
+			<td>Capsuni</td>
+			<td>15</td>
+			<td>9</td>
+		</tr>
+		<tr>
+			<td>Mango</td>
+			<td>18</td>
+			<td>20</td>
+		</tr>
+		<tr>
+			<td>Ananas</td>
+			<td>25</td>
+			<td>15</td>
+		</tr>
+	</table>
+	<br>
+	<table id="table2">
+		<tr>
+			<th>Marca</th>
+			<th id="t2th1">An</th>
+			<th id="t2th2">Pret</th>
+		</tr>
+		<tr>
+			<td>Maserati</td>
+			<td>2017</td>
+			<td>10000</td>
+		</tr>
+		<tr>
+			<td>Mercedes</td>
+			<td>2015</td>
+			<td>7500</td>
+		</tr>
+		<tr>
+			<td>Logan</td>
+			<td>2016</td>
+			<td>8000</td>
+		</tr>
+		<tr>
+			<td>Mazda</td>
+			<td>2010</td>
+			<td>8500</td>
+		</tr>
+		<tr>
+			<td>Solenza</td>
+			<td>2005</td>
+			<td>1200</td>
+		</tr>
+	</table>
+	<br>
+	<table id="table3">
+		<tr>
+			<th id="t3th0">Pozitie</th>
+			<th>Echipe</th>
+			<th id="t3th2">Victorii</th>
+			<th id="t3th3">Egaluri</th>
+			<th id="t3th4">Infrangeri</th>
+			<th id="t3th5">Puncte</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Dinamo</td>
+			<td>28</td>
+			<td>2</td>
+			<td>4</td>
+			<td>86</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>FCSB</td>
+			<td>25</td>
+			<td>1</td>
+			<td>8</td>
+			<td>76</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>CFR</td>
+			<td>24</td>
+			<td>3</td>
+			<td>7</td>
+			<td>75</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>Craiova</td>
+			<td>22</td>
+			<td>8</td>
+			<td>4</td>
+			<td>74</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Voluntari</td>
+			<td>21</td>
+			<td>5</td>
+			<td>8</td>
+			<td>68</td>
+		</tr>
+	</table>
+</body>
+</html>

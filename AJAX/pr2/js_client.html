@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema 2 - Javascript Client</title>
+	<style type="text/css">
+		#mainDiv{
+			position: absolute;
+			left: 35%;
+			text-align: center;
+		}
+		#divButtons{
+			padding-top: 10px;
+		}
+		button{
+			cursor: pointer;
+		}
+		table{
+			border: 1px solid black;
+			text-align: center;
+		}
+		th, td{
+			padding: 15px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="mainDiv">
+		<div id="divTable">
+			<table>
+				<tr>
+					<th>Nume</th>
+					<th>Prenume</th>
+					<th>Telefon</th>
+					<th>Email</th>
+				</tr>
+				<tbody id="tableBody">
+					
+				</tbody>
+			</table>
+		</div>
+		<div id="divButtons">
+			<button onclick="pressPrev()" id="prevButton">Prev</button>
+			<button onclick="pressNext()" id="nextButton">Next</button>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	var from = 0; // de la ce inregistrare sa afiseze
+	var prevButton = document.getElementById("prevButton");
+	var nextButton = document.getElementById("nextButton");
+
+	function uploadTable(from){
+		//sa nu pot da previous
+		if (from == 0){
+			prevButton.disabled = true;
+			prevButton.style.cursor = "default";
+		}
+		else{
+			prevButton.disabled = false;
+			prevButton.style.cursor = "pointer";
+		}
+
+		//sa nu pot da next
+		if(from > 3){
+			nextButton.disabled = true;
+			nextButton.style.cursor = "default";
+		}
+		else{
+			nextButton.disabled = false;
+			nextButton.style.cursor = "pointer";
+		}
+
+		//call ajax
+		var request = new XMLHttpRequest();
+		var method = "GET";
+		var url = "server_side.php?from=" + from;
+		var async = true;
+
+		request.open(method, url, async);
+		request.send();
+
+		request.onreadystatechange = function(){
+			if (this.readyState == 4 && this.status == 200){
+				//convertim rezultatul primit in format json intr un array
+				var data = JSON.parse(this.responseText);
+				var tbody = document.getElementById("tableBody");
+
+				clearTable(tbody);
+
+				var html = "";
+
+				for (var i = 0; i < data.length; i++)
+				{
+					var nume = data[i].Nume;
+					var prenume = data[i].Prenume;
+					var telefon = data[i].Telefon;
+					var email = data[i].Email;
+					html += "<tr>";
+					html += "<td>" + nume + "</td>";
+					html += "<td>" + prenume + "</td>";
+					html += "<td>" + telefon + "</td>";
+					html += "<td>" + email + "</td>";
+					html += "</tr>";
+				}
+
+				tbody.innerHTML = html;
+			}
+		}
+	}
+
+	function clearTable(tbody){
+		tbody.innerHTML = "";
+	}
+
+	function pressPrev(){
+		from -=3;
+		uploadTable(from);
+	}
+
+	function pressNext(){
+		from += 3;
+		uploadTable(from);
+	}
+
+	uploadTable(from);
+</script>
+</html>

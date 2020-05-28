@@ -1,0 +1,28 @@
+div.divMare{
+	border: 5px solid black;
+	width: 400px;
+	float: center;
+	display: flex;
+	flex-direction: row;
+}
+
+div.divStanga{
+	width: 50%;
+	float: left;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	text-align: center;
+}
+
+div.divDreapta{
+	width: 50%;
+	float: right;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+img{
+	max-width: 200px;
+}

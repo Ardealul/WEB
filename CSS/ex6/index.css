@@ -1,0 +1,39 @@
+form{
+	font-family: Verdana;
+	font-size: 15px;
+}
+
+label{
+	margin: 10px;
+	width: 250px;
+	text-align: right;
+	float: left;
+	clear: left;
+
+}
+
+#nume, #prenume{
+	float: left;
+	background-image: url("square.png");
+	background-size: 25px;
+	margin: 10px;
+	width: 495px;
+	height: 25px;
+	border: none;
+	letter-spacing: 18.5px;
+	padding-left: 8.5px;
+	font-size: 13px;
+}
+
+#cnp{
+	float: left;
+	background-image: url("square.png");
+	background-size: 25px;
+	margin: 10px;
+	width: 321px;
+	height: 25px;
+	border: none;
+	letter-spacing: 18px;
+	padding-left: 8.5px;
+	font-size: 13px;
+}

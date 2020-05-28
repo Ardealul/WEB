@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema 3 - Javascript Client</title>
+	<style type="text/css">
+		div{
+			text-align: center;
+		}
+		label{
+			width: 200px;
+			text-align: right;
+			display: inline-block;
+			font-family: Arial;
+			font-size: 16px;
+		}
+		input{
+			width: 200px;
+		}
+		button{
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	<div id="selectDiv">
+		<h4>ID:
+			<select id="id-uri" onchange="showData(this.value)" onfocus="setPrevious(this.value)">
+				<option value=""></option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</h4>
+	</div>
+	<div id="mainDiv">
+		<label>Marca:</label>
+		<input id="marca" type="text" name="marca" oninput="activateSaveButton()"><br>
+		<label>Model:</label>
+		<input id="model" type="text" name="model" oninput="activateSaveButton()"><br>
+		<label>An Fabricatie:</label>
+		<input id="anFabricatie" type="text" name="anFabricatie" oninput="activateSaveButton()"><br><br>
+		<button disabled="true" onclick="saveData()">Save</button>
+	</div>
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	//indica daca noile elemente au fost salvate
+	var saved = true;
+	//optiunea precedenta
+	var previous;
+
+	var idAuto = document.querySelector("select").value;
+	var marca = document.getElementById("marca");
+	var model = document.getElementById("model");
+	var anFabricatie = document.getElementById("anFabricatie");
+
+	//completeaza formularul cu informatii primite de la server
+	function showData(id){
+		console.log("pt id: " + id + " saved: " + saved);
+		//daca informatiile nu au fost salvate
+		if(saved == false){
+			if(confirm("Salvezi datele curente?") == true){
+				saveData();
+			}
+			saved = true;
+			document.getElementById("id-uri").selected = previous;
+		}
+		//apel AJAX pt obtinerea informatiilor de la server
+		var request = new XMLHttpRequest();
+		var method = "GET";
+		var url = "server_side.php?optiune=get&id=" + id;
+		var async = true;
+
+		request.open(method, url, async);
+		request.send();
+
+		request.onreadystatechange = function(){
+			if (this.readyState == 4 && this.status == 200){
+				//convertim rezultatul primit in format json intr un array
+				var data = JSON.parse(this.responseText);
+
+				//daca primim informatii de la server, le adaugam in formular
+				if(data.length != 0){
+					idAuto = id;
+					marca.value = data[0].Marca;
+					model.value = data[0].Model;
+					anFabricatie.value = data[0].AnFabricatie;
+				}
+			}
+		}
+	}
+
+	//salveaza in baza de date
+	function saveData(){
+		//apel AJAX pt modificarea informatiilor in baza de date
+		var request = new XMLHttpRequest();
+		var method = "GET";
+		var url = "server_side.php?optiune=update&id=" + idAuto + "&marca=" + marca.value + "&model=" + model.value + "&an=" + anFabricatie.value;
+		var async = true;
+
+		request.open(method, url, async);
+		request.send();
+
+		request.onreadystatechange = function(){
+			if (this.readyState == 4 && this.status == 200){
+				alert("Datele au fost salvate cu succes!");
+			}
+		}
+		//orice modificare s-ar fi produs, a fost salvata
+		saved = true;
+	}
+
+	//seteaza valoarea optiunii precedente
+	function setPrevious(value){
+		previous = value;
+	}
+
+	//activeaza butonul de save
+	function activateSaveButton(){
+		document.querySelector("button").disabled = false;
+		saved = false;
+	}
+</script>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Problema 1 - JQuery Client</title>
+	<style type="text/css">
+		ul{
+			list-style-type: none;
+			border: 1px solid black;
+			margin: 0px;
+			padding: 10px;
+		}
+		li{
+			display: flex;
+			cursor: pointer;
+			font-family: Arial;
+			font-size: 16px;
+		}
+		li:hover{
+			color: white;
+			background-color: black;
+		}
+		#plecare{
+			position: absolute;
+  			left: 35%;
+  			display: inline;
+  			text-align: center;
+		}
+		#sosire{
+			position: absolute;
+  			left: 45%;
+  			display: inline;
+  			text-align: center;
+		}
+		h2{
+			margin-bottom: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<div id="plecare">
+			<h2>Plecare</h2>
+			<ul id="listaPlecare">
+				<li id="Oradea">Oradea</li>
+				<li id="Cluj-Napoca">Cluj-Napoca</li>
+				<li id="Arad">Arad</li>
+				<li id="Suceava">Suceava</li>
+			</ul>
+		</div>
+		<div id="sosire">
+			<h2>Sosire</h2>
+			<ul id="listaSosire">
+				
+			</ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function showArrivals(orasPlecare){
+		//call ajax
+		var method = "GET";
+		var url = "server_side.php?orasPlecare=" + orasPlecare;
+
+		$.ajax({
+			type: method,
+			url: url,
+			success: function(data){
+				//convertim rezultatul primit in format json intr un array
+				var data = JSON.parse(data);
+				var ul = $("#listaSosire");
+
+				clearListaSosire(ul);
+
+				for (var i = 0; i < data.length; i++)
+				{
+					var sosire = data[i].Sosire;
+					var li = "<li>" + sosire + "</li>";
+    				ul.append(li);
+				}
+			}
+		});
+	}
+
+	//sterge elementele listei date ca parametru
+	function clearListaSosire(ul){
+		ul.empty();
+	}
+
+	$(document).ready(function(){
+		$("#Oradea").click(function(){
+			showArrivals("Oradea");
+		});
+		$("#Cluj-Napoca").click(function(){
+			showArrivals("Cluj-Napoca");
+		});
+		$("#Arad").click(function(){
+			showArrivals("Arad");
+		});
+		$("#Suceava").click(function(){
+			showArrivals("Suceava");
+		});
+	});
+</script>
+</html>
